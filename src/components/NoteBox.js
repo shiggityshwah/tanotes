@@ -1,11 +1,5 @@
 import React from "react";
-import {
-    Paper,
-    Grid,
-    TextField,
-    Button,
-    Typography
-} from "@material-ui/core";
+import { Paper, Grid, TextField, Button, Typography } from "@material-ui/core";
 import "../containers/App.css";
 import "typeface-pacifico";
 
@@ -16,7 +10,12 @@ const NoteBox = ({
     textChange
 }) => {
     return (
-        <Grid container justify="flex-end" alignItems="center" style={{ padding: "50px" }}>
+        <Grid
+            container
+            justify="flex-end"
+            alignItems="center"
+            style={{ padding: "50px" }}
+        >
             <Grid item xs={12}>
                 <Grid container alignItems="center">
                     <Grid item>
@@ -84,10 +83,9 @@ const NoteBox = ({
 
             <Grid item>
                 <Button
-                    
-                    variant="raised" 
-                    color="primary" 
-                    style={{ textTransform: "none", margin:"0px 50px"}}
+                    variant="raised"
+                    color="primary"
+                    style={{ textTransform: "none", margin: "0px 50px" }}
                 >
                     SAVE NOTE
                 </Button>

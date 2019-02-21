@@ -124,7 +124,13 @@ class App extends Component {
                                         textChange={this.onTextChange}
                                     />
                                 </Grid>
-                                <Grid item alignItems="stretch" xs={12} sm={12} md={3}>
+                                <Grid
+                                    item
+                                    alignItems="stretch"
+                                    xs={12}
+                                    sm={12}
+                                    md={3}
+                                >
                                     <NoteList
                                         noteTitles={this.state.noteTitles}
                                         clickTitle={this.onClickTitle}
@@ -137,14 +143,13 @@ class App extends Component {
                     <Grid item xs={12}>
                         <div className="footer">
                             <Grid container spacing={16}>
-                                <Grid
-                                    item
-                                    xs={12}
-                                >
-                                    <Grid container justify="center" alignItems="center">
-                                        <Grid item>
-                                          Saved:
-                                        </Grid>
+                                <Grid item xs={12}>
+                                    <Grid
+                                        container
+                                        justify="center"
+                                        alignItems="center"
+                                    >
+                                        <Grid item>Saved:</Grid>
                                         <Grid item>
                                             {this.state.isSaved ? (
                                                 <CheckBox
@@ -158,7 +163,11 @@ class App extends Component {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item xs={12} style={{ textAlign: "center" }} >
+                                <Grid
+                                    item
+                                    xs={12}
+                                    style={{ textAlign: "center" }}
+                                >
                                     Current Note:{" "}
                                     {
                                         this.state.noteTitles[
