@@ -31,7 +31,7 @@ class App extends Component {
             currentNote: 0,
             noteTitles: ["test1", "test2"],
             noteTexts: ["test1", "test2"],
-            signedIn: true
+            signedIn: false,
         };
 
         this.timeoutId = null;

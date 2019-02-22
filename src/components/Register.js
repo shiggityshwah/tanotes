@@ -8,22 +8,63 @@ import {
     Checkbox,
     Typography
 } from "@material-ui/core";
-import { Face, Fingerprint, PermIdentity } from "@material-ui/icons";
+import { Face, Fingerprint, PermIdentity, Error } from "@material-ui/icons";
 
 class Register extends Component {
-    state = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: ""
-    };
+    constructor(props) {
+        super();
+        this.state = {
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            passConfirm: "",
+            passWarn: false
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.onSubmitRegister = this.onSubmitRegister.bind(this);
+    }
 
-    handleChange = input => e => {
-        this.setState({ [input]: e.target.value });
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.id;
+        if (name === "passConfirm" && value !== this.state.password) {
+            this.setState({
+                passWarn: true
+            });
+        } else if (name === "passConfirm" && value === this.state.password) {
+            this.setState({
+                passWarn: false
+            });
+        }
+        this.setState({
+            [name]: value
+        });
+    }
+
+    onSubmitRegister = () => {
+        fetch("localhost:3000", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName
+            })
+        })
+            .then(response => response.json())
+            .then(user => {
+                if (user.id) {
+                    this.props.loadUser(user);
+                    this.props.onRouteChange("home");
+                }
+            });
     };
 
     render() {
-        const { firstName, lastName, email, password } = this.state;
+        const { passWarn } = this.state;
         return (
             <Grid
                 container
@@ -69,6 +110,7 @@ class Register extends Component {
                                 id="firstName"
                                 label="First Name"
                                 type="text"
+                                onChange={this.handleInputChange}
                                 fullWidth
                                 autoFocus
                                 required
@@ -89,6 +131,7 @@ class Register extends Component {
                                 id="lastName"
                                 label="Last Name"
                                 type="text"
+                                onChange={this.handleInputChange}
                                 fullWidth
                                 autoFocus
                                 required
@@ -109,6 +152,7 @@ class Register extends Component {
                                 id="email"
                                 label="Email Address"
                                 type="email"
+                                onChange={this.handleInputChange}
                                 fullWidth
                                 autoFocus
                                 required
@@ -129,16 +173,34 @@ class Register extends Component {
                                 id="password"
                                 label="Password"
                                 type="password"
+                                onChange={this.handleInputChange}
                                 fullWidth
                                 required
                             />
                         </Grid>
                     </Grid>
+                    {passWarn ? (
+                        <Grid
+                            container
+                            spacing={8}
+                            alignItems="center"
+                            justify="center"
+                        >
+                            <Grid item>
+                                <Error style={{ color: "#ff1744" }} />
+                            </Grid>
+                            <Grid item>
+                                <Typography>Passwords do not match.</Typography>
+                            </Grid>
+                        </Grid>
+                    ) : (
+                        <div style={{ padding: "10px" }} />
+                    )}
                     <Grid
                         container
                         spacing={8}
                         alignItems="flex-end"
-                        style={{ padding: "20px" }}
+                        style={{ padding: "0px 20px 20px 20px" }}
                     >
                         <Grid item>
                             <Fingerprint style={{ color: "#FFF3E0" }} />
@@ -148,12 +210,13 @@ class Register extends Component {
                                 id="passConfirm"
                                 label="Confirm Password"
                                 type="password"
+                                onChange={this.handleInputChange}
                                 fullWidth
                                 required
                             />
                         </Grid>
                     </Grid>
-                    <Grid container alignItems="center" justify="space-between">
+                    {/* <Grid container alignItems="center" justify="space-between">
                         <Grid item>
                             <FormControlLabel
                                 control={<Checkbox color="primary" />}
@@ -171,7 +234,7 @@ class Register extends Component {
                                 Forgot Password ?
                             </Button>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                     <Grid
                         container
                         justify="center"
@@ -182,6 +245,7 @@ class Register extends Component {
                             variant="raised"
                             color="primary"
                             style={{ textTransform: "none" }}
+                            onClick={this.onSubmitRegister}
                         >
                             Register
                         </Button>
