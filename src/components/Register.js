@@ -44,7 +44,7 @@ class Register extends Component {
     }
 
     onSubmitRegister = () => {
-        fetch("localhost:3000", {
+        fetch("localhost:3000/register", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -112,7 +112,6 @@ class Register extends Component {
                                 type="text"
                                 onChange={this.handleInputChange}
                                 fullWidth
-                                autoFocus
                                 required
                             />
                         </Grid>
@@ -133,7 +132,6 @@ class Register extends Component {
                                 type="text"
                                 onChange={this.handleInputChange}
                                 fullWidth
-                                autoFocus
                                 required
                             />
                         </Grid>
@@ -154,7 +152,6 @@ class Register extends Component {
                                 type="email"
                                 onChange={this.handleInputChange}
                                 fullWidth
-                                autoFocus
                                 required
                             />
                         </Grid>

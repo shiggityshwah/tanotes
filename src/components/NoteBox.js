@@ -14,7 +14,7 @@ const NoteBox = ({
             container
             justify="flex-end"
             alignItems="center"
-            style={{ padding: "50px" }}
+            style={{ padding: "0 0 0 1rem" }}
         >
             <Grid item xs={12}>
                 <Grid container alignItems="center">
