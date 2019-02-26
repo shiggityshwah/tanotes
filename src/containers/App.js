@@ -31,7 +31,7 @@ class App extends Component {
             currentNote: 0,
             noteTitles: ["test1", "test2"],
             noteTexts: ["test1", "test2"],
-            signedIn: false,
+            signedIn: true,
         };
 
         this.timeoutId = null;
@@ -41,7 +41,7 @@ class App extends Component {
         this.onClickTitle = this.onClickTitle.bind(this);
         this.saveToDatabase = this.saveToDatabase.bind(this);
     }
-    /* 
+    /*
   componentDidMount() {
     fetch('http://localhost:3000')
       .then(response => response.json())
@@ -107,38 +107,52 @@ class App extends Component {
                         {this.state.signedIn === false ? (
                             <Register />
                         ) : (
-                            <Grid container alignItems="stretch" spacing={12}>
-                                <Grid item xs={12} sm={12} md={9}>
-                                    <NoteBox
-                                        currentNoteTitle={
-                                            this.state.noteTitles[
+                                <Grid container alignItems="stretch" spacing={12}>
+                                    <Grid
+                                        item
+                                        alignItems="stretch"
+                                        xs={0}
+                                        sm={0}
+                                        md={0}
+                                        lg={1}
+                                        xl={2}
+                                    >
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={12}
+                                        md={12}
+                                        lg={10}
+                                        xl={8}
+                                    >
+                                        <NoteBox
+                                            currentNoteTitle={
+                                                this.state.noteTitles[
                                                 this.state.currentNote
-                                            ]
-                                        }
-                                        currentNoteText={
-                                            this.state.noteTexts[
+                                                ]
+                                            }
+                                            currentNoteText={
+                                                this.state.noteTexts[
                                                 this.state.currentNote
-                                            ]
-                                        }
-                                        titleChange={this.onTitleChange}
-                                        textChange={this.onTextChange}
-                                    />
+                                                ]
+                                            }
+                                            titleChange={this.onTitleChange}
+                                            textChange={this.onTextChange}
+                                        />
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        alignItems="stretch"
+                                        xs={0}
+                                        sm={0}
+                                        md={0}
+                                        lg={1}
+                                        xl={2}
+                                    >
+                                    </Grid>
                                 </Grid>
-                                <Grid
-                                    item
-                                    alignItems="stretch"
-                                    xs={12}
-                                    sm={12}
-                                    md={3}
-                                >
-                                    <NoteList
-                                        noteTitles={this.state.noteTitles}
-                                        clickTitle={this.onClickTitle}
-                                        createNote={this.onCreateNote}
-                                    />
-                                </Grid>
-                            </Grid>
-                        )}
+                            )}
                     </Grid>
                     <Grid item xs={12}>
                         <div className="footer">
@@ -156,10 +170,10 @@ class App extends Component {
                                                     style={{ fontSize: 40 }}
                                                 />
                                             ) : (
-                                                <CheckBoxOutlineBlank
-                                                    style={{ fontSize: 40 }}
-                                                />
-                                            )}
+                                                    <CheckBoxOutlineBlank
+                                                        style={{ fontSize: 40 }}
+                                                    />
+                                                )}
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -171,7 +185,7 @@ class App extends Component {
                                     Current Note:{" "}
                                     {
                                         this.state.noteTitles[
-                                            this.state.currentNote
+                                        this.state.currentNote
                                         ]
                                     }
                                 </Grid>

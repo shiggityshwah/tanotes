@@ -14,7 +14,7 @@ const NoteBox = ({
             container
             justify="flex-end"
             alignItems="center"
-            style={{ padding: "0 0 0 1rem" }}
+            style={{ padding: "1rem" }}
         >
             <Grid item xs={12}>
                 <Grid container alignItems="center">
@@ -40,7 +40,7 @@ const NoteBox = ({
                                 value={currentNoteTitle}
                                 onChange={titleChange}
                                 margin="normal"
-                                variant="outlined"
+                                variant="filled"
                             />
                         </Paper>
                     </Grid>
