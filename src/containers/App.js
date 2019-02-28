@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import NoteList from "../components/NoteList";
 import NoteBox from "../components/NoteBox";
-import NavBar from "../components/NavBar";
+import Header from "../components/Header";
 import Register from "../components/Register";
 import Grid from "@material-ui/core/Grid";
 import CheckBox from "@material-ui/icons/CheckBox";
@@ -35,11 +35,7 @@ class App extends Component {
         };
 
         this.timeoutId = null;
-        this.onTitleChange = this.onTitleChange.bind(this);
-        this.onTextChange = this.onTextChange.bind(this);
-        this.onCreateNote = this.onCreateNote.bind(this);
-        this.onClickTitle = this.onClickTitle.bind(this);
-        this.saveToDatabase = this.saveToDatabase.bind(this);
+
     }
     /*
   componentDidMount() {
@@ -96,28 +92,19 @@ class App extends Component {
             <MuiThemeProvider theme={theme}>
                 <Grid
                     container
-                    spacing={12}
+                    spacing={0}
                     alignItems="stretch"
                     style={{ backgroundColor: "#424242" }}
                 >
                     <Grid item xs={12}>
-                        <NavBar />
+                        <Header />
                     </Grid>
                     <Grid item xs={12}>
                         {this.state.signedIn === false ? (
                             <Register />
                         ) : (
-                                <Grid container alignItems="stretch" spacing={12}>
-                                    <Grid
-                                        item
-                                        alignItems="stretch"
-                                        xs={0}
-                                        sm={0}
-                                        md={0}
-                                        lg={1}
-                                        xl={2}
-                                    >
-                                    </Grid>
+                                <Grid container justify="center" spacing={8}>
+                                    
                                     <Grid
                                         item
                                         xs={12}
@@ -140,16 +127,6 @@ class App extends Component {
                                             titleChange={this.onTitleChange}
                                             textChange={this.onTextChange}
                                         />
-                                    </Grid>
-                                    <Grid
-                                        item
-                                        alignItems="stretch"
-                                        xs={0}
-                                        sm={0}
-                                        md={0}
-                                        lg={1}
-                                        xl={2}
-                                    >
                                     </Grid>
                                 </Grid>
                             )}
