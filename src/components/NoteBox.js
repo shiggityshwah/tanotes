@@ -43,8 +43,9 @@ class NoteBox extends Component {
 
         const Styled = createStyled({
             GridContainer: {
-                padding: "1rem",
                 backgroundColor: "#212121"
+            },
+            GridItem: {
             },
             Typography: {
                 fontFamily: "'Pacifico', cursive"
@@ -59,7 +60,7 @@ class NoteBox extends Component {
             },
             Button: {
                 textTransform: "none",
-                margin: "0px 50px",
+                margin: "50px",
                 background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
             },
             bootstrapInput: {
@@ -88,6 +89,7 @@ class NoteBox extends Component {
             },
             cssLabel: {
                 fontFamily: "'Pacifico', cursive",
+                color:  "#fff",
                 fontSize: "5rem",
                 "&$cssFocused": {
                     fontFamily: "'Pacifico', cursive",
@@ -123,7 +125,7 @@ class NoteBox extends Component {
                         alignItems="center"
                         className={classes.GridContainer}
                     >
-                        <Grid item xs={12}>
+                        <Grid item xs={12} className={classes.GridItem} >
                             <TextField
                                 fullWidth
                                 className={classes.titleBox}
@@ -147,30 +149,28 @@ class NoteBox extends Component {
 
                         <Grid item xs={12}>
                             <Grid container alignItems="flex-start">
-                                <Grid item>
-                                    <Typography
-                                        variant="h2"
-                                        className={[
-                                            classes.Typography,
-                                            classes.Note
-                                        ].join(" ")}
-                                    >
-                                        Note:
-                                    </Typography>
-                                </Grid>
-                                <Grid item md={true} sm={12} xs={12}>
-                                    <Paper className={classes.Paper}>
-                                        <TextField
-                                            fullWidth
-                                            id="text"
-                                            multiline
-                                            rows="4"
-                                            margin="normal"
-                                            variant="outlined"
-                                            value={currentNoteText}
-                                            onChange={textChange}
-                                        />
-                                    </Paper>
+                                <Grid item xs={12} className={classes.GridItem}>
+                                <TextField
+                                fullWidth
+                                multiline
+                                rows={50}
+                                className={classes.titleBox}
+                                InputLabelProps={{
+                                    classes: {
+                                        root: classes.cssLabel,
+                                        focused: classes.cssFocused
+                                    }
+                                }}
+                                InputProps={{
+                                    classes: {
+                                        root: classes.cssOutlinedInput,
+                                        focused: classes.cssFocused,
+                                        notchedOutline: classes.notchedOutline
+                                    }
+                                }}
+                                label="Note:"
+                                id="custom-css-outlined-input"
+                            />
                                 </Grid>
                             </Grid>
                         </Grid>

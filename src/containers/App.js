@@ -103,7 +103,7 @@ class App extends Component {
                         {this.state.signedIn === false ? (
                             <Register />
                         ) : (
-                                <Grid container justify="center" spacing={8}>
+                                <Grid container justify="center" spacing={0}>
                                     
                                     <Grid
                                         item
@@ -132,8 +132,7 @@ class App extends Component {
                             )}
                     </Grid>
                     <Grid item xs={12}>
-                        <div className="footer">
-                            <Grid container spacing={16}>
+                            <Grid style={{ width: "100%"}} container spacing={16}>
                                 <Grid item xs={12}>
                                     <Grid
                                         container
@@ -159,7 +158,7 @@ class App extends Component {
                                     xs={12}
                                     style={{ textAlign: "center" }}
                                 >
-                                    Current Note:{" "}
+                                    Current  Note:{" "}
                                     {
                                         this.state.noteTitles[
                                         this.state.currentNote
@@ -167,7 +166,6 @@ class App extends Component {
                                     }
                                 </Grid>
                             </Grid>
-                        </div>
                     </Grid>
                 </Grid>
             </MuiThemeProvider>

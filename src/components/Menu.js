@@ -12,7 +12,13 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import { MenuOutlined, KeyboardArrowLeft, FiberNew } from "@material-ui/icons";
+import { MenuOutlined, ArrowDropDown, FiberNew } from "@material-ui/icons";
+import endlessClouds from "../endlessClouds.svg";
+import polkaDots from "../polkaDots.svg";
+import pencil from "../pencil.svg";
+import curtain from "../curtain.svg";
+import bankNote from "../bankNote.svg";
+import greatwave from "../greatwave.PNG";
 
 function createStyled(styles, options) {
     function Styled(props) {
@@ -28,15 +34,19 @@ function createStyled(styles, options) {
 
 const Styled = createStyled({
     IconButton: {
-        background: "linear-gradient(-135deg, #FF8E53 30%, #FE6B8B 90%)",
-        filter: "drop-shadow(.15rem .15rem .1rem #bf360c)"
+        height: "6rem",
+        width: "6rem",
+        //backgroundColor: "#FF8E53",
+        backgroundImage: `url(${endlessClouds})`,
+        "&:hover": {
+        }
     },
     MenuIcon: {
+        position:"relative",
+        bottom: "1rem",
         zIndex: 2,
         fontSize: 100,
-        color: "#fff",
-        margin: "0 0 0 auto",
-        filter: "drop-shadow(0 0 .1rem #bf360c)"
+        filter: "drop-shadow(.1rem .1rem .01rem #bf360c)"
     },
     Popper: {
         zIndex: 5
@@ -90,13 +100,15 @@ class Menu extends Component {
             <Styled>
                 {({ classes }) => (
                     <div>
+                        
                         <IconButton
                         className={classes.IconButton}
                             value="open"
                             aria-label="Open drawer"
                             onClick={this.handleMenuToggle}
                         >
-                            <MenuOutlined className={classes.MenuIcon} />
+                           <img src={pencil} className={classes.MenuIcon}
+                            alt="menuIcon" />
                         </IconButton>
 
                         <Popper

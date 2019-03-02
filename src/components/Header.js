@@ -33,11 +33,13 @@ const Styled = createStyled({
     },
     Icon: {
         fontSize: 100,
-        color: "#fff"
+        color: "#fff",
+        filter: "drop-shadow(.1rem .1rem .01rem #bf360c)"
     },
     Typography: {
         fontSize: 70,
-        fontFamily: "'Pacifico', cursive"
+        fontFamily: "'Pacifico', cursive",
+        filter: "drop-shadow(.1rem .1rem .01rem #bf360c)"
     },
 });
 
