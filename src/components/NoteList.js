@@ -9,40 +9,70 @@ import {
 } from "@material-ui/core";
 import "../containers/App.css";
 import "typeface-pacifico";
+import "typeface-ropa-sans";
 
 const NoteList = ({ noteTitles, createNote, clickTitle }) => {
     const noteComponent = noteTitles.map((user, i) => {
         return (
-            <ListItem button key={i} id={i} onClick={clickTitle} divider>
-                <Typography>{noteTitles[i]}</Typography>
-            </ListItem>
+            <Button
+                fullWidth
+                id={i}
+                variant="contained"
+                onClick={clickTitle}
+                style={{
+                    borderRadius:"1.25rem",
+                    margin: ".5rem 0",
+                    minHeight: "2.5rem",
+                    padding: ".5rem",
+                    background: "rgba(40, 40, 40, 0.7)"
+                }}
+            >
+                <Typography
+                    style={{
+                        fontSize: "1rem",
+                        fontFamily: "'Ropa Sans', sans-serif"
+                    }}
+                >
+                    {noteTitles[i]}
+                </Typography>
+            </Button>
         );
     });
     return (
-        <Paper>
-            <Grid alignItems="stretch" container>
-                <Grid item xs={12} style={{ textAlign: "center" }}>
-                    <List
-                        component="nav"
-                        justify="center"
-                        style={{ width: "inherit", backgroundColor: "#424242" }}
-                    >
-                        {noteComponent}
-                        <ListItem>
-                            <Button
-                                fullWidth
-                                variant="raised"
-                                color="primary"
-                                style={{ textTransform: "none" }}
-                                onClick={createNote}
-                            >
-                                + create new note
-                            </Button>
-                        </ListItem>
-                    </List>
-                </Grid>
+        <Paper style={{position:"relative", height:"100%", margin:"30px", borderRadius:"10px", background:"rgba(20,20,20,0.5)", zIndex:3 }}>
+        <Grid alignItems="stretch" justify="center" container>
+            <Grid
+                item
+                xs={10}
+                style={{
+                    margin: ".5rem",
+                    padding: "1rem 0 0 0",
+                    position: "relative",
+                    textAlign: "center",
+                    zIndex: 6
+                }}
+            >
+                {noteComponent}
+
+                <Button
+                    fullWidth
+                    variant="contained"
+                    
+                    color="primary"
+                    style={{
+                        margin: "1rem 0",
+                        minHeight: "1.5rem",
+                        padding: ".5rem",
+                        background: "rgba(40, 40, 40,.6)",
+                border: "solid 2px #16B2AA",
+                borderRadius: 100
+                    }}
+                    onClick={createNote}
+                >
+                    + create new note
+                </Button>
             </Grid>
-        </Paper>
+        </Grid></Paper>
     );
 };
 export default NoteList;

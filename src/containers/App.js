@@ -9,12 +9,13 @@ import CheckBox from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlank from "@material-ui/icons/CheckBoxOutlineBlank";
 import "./App.css";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import yellow from "@material-ui/core/colors/yellow";
+import blueGrey from "@material-ui/core/colors/blueGrey";
+import Background from "../images/headerbg.jpg";
 
 const theme = createMuiTheme({
     palette: {
         type: "dark",
-        primary: yellow,
+        primary: blueGrey,
         secondary: {
             main: "#f44336"
         }
@@ -31,11 +32,10 @@ class App extends Component {
             currentNote: 0,
             noteTitles: ["test1", "test2"],
             noteTexts: ["test1", "test2"],
-            signedIn: true,
+            signedIn: true
         };
 
         this.timeoutId = null;
-
     }
     /*
   componentDidMount() {
@@ -73,7 +73,8 @@ class App extends Component {
     };
 
     onClickTitle = event => {
-        const title = event.target.id;
+        const title = event.currentTarget.id;
+        console.log(event.currentTarget);
         this.setState({ currentNote: title });
     };
 
@@ -90,11 +91,39 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
+                <div
+                    style={{
+                        position: "absolute",
+                        backgroundImage: `url(${Background})`,
+                        backgroundPosition: "50%",
+                        backgroundSize: "cover",
+                        zIndex: 0,
+                        display: "flex",
+                        width: "100%",
+                        height: "250px",
+                        pointerEvents:"none"
+                    }}
+                />
+                <div
+                    style={{
+                        background:
+                            "linear-gradient(180deg,rgba(11, 11, 19,.8),#0b0b13)",
+                        position: "absolute",
+                        width: "100%",
+                        zIndex: 0,
+                        height: "250px",
+                        pointerEvents:"none"
+                    }}
+                />
+
                 <Grid
                     container
                     spacing={0}
+                    position="relative"
                     alignItems="stretch"
-                    style={{ backgroundColor: "#424242" }}
+                    style={{
+                        backgroundColor: "#0b0b13"
+                    }}
                 >
                     <Grid item xs={12}>
                         <Header />
@@ -103,69 +132,68 @@ class App extends Component {
                         {this.state.signedIn === false ? (
                             <Register />
                         ) : (
-                                <Grid container justify="center" spacing={0}>
-                                    
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        sm={12}
-                                        md={12}
-                                        lg={10}
-                                        xl={8}
-                                    >
-                                        <NoteBox
-                                            currentNoteTitle={
-                                                this.state.noteTitles[
-                                                this.state.currentNote
-                                                ]
-                                            }
-                                            currentNoteText={
-                                                this.state.noteTexts[
-                                                this.state.currentNote
-                                                ]
-                                            }
-                                            titleChange={this.onTitleChange}
-                                            textChange={this.onTextChange}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            )}
-                    </Grid>
-                    <Grid item xs={12}>
-                            <Grid style={{ width: "100%"}} container spacing={16}>
-                                <Grid item xs={12}>
-                                    <Grid
-                                        container
-                                        justify="center"
-                                        alignItems="center"
-                                    >
-                                        <Grid item>Saved:</Grid>
-                                        <Grid item>
-                                            {this.state.isSaved ? (
-                                                <CheckBox
-                                                    style={{ fontSize: 40 }}
-                                                />
-                                            ) : (
-                                                    <CheckBoxOutlineBlank
-                                                        style={{ fontSize: 40 }}
-                                                    />
-                                                )}
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
+                            <Grid container justify="center" spacing={0}>
                                 <Grid
                                     item
                                     xs={12}
-                                    style={{ textAlign: "center" }}
+                                    sm={12}
+                                    md={12}
+                                    lg={9}
+                                    xl={8}
                                 >
-                                    Current  Note:{" "}
-                                    {
-                                        this.state.noteTitles[
-                                        this.state.currentNote
-                                        ]
-                                    }
+                                    <NoteBox
+                                        style={{ zIndex: 3 }}
+                                        currentNoteTitle={
+                                            this.state.noteTitles[
+                                                this.state.currentNote
+                                            ]
+                                        }
+                                        currentNoteText={
+                                            this.state.noteTexts[
+                                                this.state.currentNote
+                                            ]
+                                        }
+                                        titleChange={this.onTitleChange}
+                                        textChange={this.onTextChange}
+                                    />
+                                </Grid>
+                                <Grid  item xs={3}>
+                                    <NoteList
+                                        noteTitles={this.state.noteTitles}
+                                        createNote={this.onCreateNote}
+                                        clickTitle={this.onClickTitle}
+                                    />
                                 </Grid>
                             </Grid>
+                        )}
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Grid style={{ width: "100%" }} container spacing={16}>
+                            <Grid item xs={12}>
+                                <Grid
+                                    container
+                                    justify="center"
+                                    alignItems="center"
+                                >
+                                    <Grid item>Saved:</Grid>
+                                    <Grid item>
+                                        {this.state.isSaved ? (
+                                            <CheckBox
+                                                style={{ fontSize: 40 }}
+                                            />
+                                        ) : (
+                                            <CheckBoxOutlineBlank
+                                                style={{ fontSize: 40 }}
+                                            />
+                                        )}
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} style={{ textAlign: "center" }}>
+                                Current Note:{" "}
+                                {this.state.noteTitles[this.state.currentNote]}
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </MuiThemeProvider>

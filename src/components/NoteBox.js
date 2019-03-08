@@ -14,6 +14,8 @@ import purple from "@material-ui/core/colors/purple";
 import "../containers/App.css";
 import "typeface-pacifico";
 import "typeface-roboto";
+import "typeface-ropa-sans";
+import endlessClouds from "../endlessClouds.svg";
 
 function createStyled(styles, options) {
     function Styled(props) {
@@ -26,34 +28,18 @@ function createStyled(styles, options) {
     };
     return withStyles(styles, options)(Styled);
 }
-
-class NoteBox extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-    render() {
-        const {
-            currentNoteTitle,
-            currentNoteText,
-            titleChange,
-            textChange,
-            theme
-        } = this.props;
-
-        const Styled = createStyled({
+const Styled = createStyled({
             GridContainer: {
-                backgroundColor: "#212121"
+               
             },
-            GridItem: {
-            },
-            Typography: {
-                fontFamily: "'Pacifico', cursive"
-            },
+            GridItem: {},
             Paper: {
+                position: "relative",
                 margin: "30px",
                 padding: "6px 20px 10px 20px",
-                backgroundColor: "#212121"
+                borderRadius: "10px",
+                background: "rgba(21, 21, 21,.6)",
+                zIndex: 5
             },
             Note: {
                 margin: "3rem 0 0 0"
@@ -61,39 +47,25 @@ class NoteBox extends Component {
             Button: {
                 textTransform: "none",
                 margin: "50px",
-                background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
+                background: "rgba(40, 40, 40,.6)",
+                border: "solid 2px #16B2AA",
+                borderRadius: 100
+                
             },
-            bootstrapInput: {
-                borderRadius: 4,
-                position: "relative",
-                border: "1px solid #ced4da",
-                fontSize: 16,
-                width: "auto",
-                padding: "10px 12px",
-                zIndex: 2,
-                backgroundColor: "#616161",
-                transition: theme.transitions.create([
-                    "border-color",
-                    "box-shadow"
-                ]),
-
-                fontFamily: "'Roboto', cursive",
-                "&:focus": {
-                    borderRadius: 4,
-                    borderColor: purple[500],
-                    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
-                }
-            },
+        
+           
             titleBox: {
-                padding: "3.3rem 0 0 0",
+                padding: "3.3rem 0 0 0"
             },
             cssLabel: {
-                fontFamily: "'Pacifico', cursive",
-                color:  "#fff",
+                fontFamily: "'Ropa Sans', sans-serif",
+                fontStyle: "italic",
+                color: "#fff",
                 fontSize: "5rem",
                 "&$cssFocused": {
-                    fontFamily: "'Pacifico', cursive",
-                    color:  "#FE6B8B"
+                    fontFamily: "'Ropa Sans', sans-serif",
+
+                    color: "#FE6B8B"
                 }
             },
             cssFocused: {},
@@ -112,79 +84,98 @@ class NoteBox extends Component {
                     }
                 }
             },
-            notchedOutline: {}
+            Typography: {
+                fontFamily: "'Ropa Sans', sans-serif",
+                fontSize: "2rem",
+                filter: "drop-shadow(.1rem .1rem .01rem #bf360c)"
+            }
         });
+class NoteBox extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    render() {
+        const {
+            currentNoteTitle,
+            currentNoteText,
+            titleChange,
+            textChange,
+            theme
+        } = this.props;
+
+        
 
         return (
             <Styled>
                 {({ classes }) => (
-                    <Grid
-                        spacing={0}
-                        container
-                        justify="flex-end"
-                        alignItems="center"
-                        className={classes.GridContainer}
-                    >
-                        <Grid item xs={12} className={classes.GridItem} >
-                            <TextField
-                                fullWidth
-                                className={classes.titleBox}
-                                InputLabelProps={{
-                                    classes: {
-                                        root: classes.cssLabel,
-                                        focused: classes.cssFocused
-                                    }
-                                }}
-                                InputProps={{
-                                    classes: {
-                                        root: classes.cssOutlinedInput,
-                                        focused: classes.cssFocused,
-                                        notchedOutline: classes.notchedOutline
-                                    }
-                                }}
-                                label="Title:"
-                                id="custom-css-outlined-input"
-                            />
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <Grid container alignItems="flex-start">
-                                <Grid item xs={12} className={classes.GridItem}>
+                    
+                        <Grid
+                            spacing={0}
+                            container
+                            justify="flex-end"
+                            alignItems="center"
+                            className={classes.GridContainer}
+                        >
+                            <Grid item xs={12} className={classes.GridItem}><Paper className={classes.Paper}>
                                 <TextField
-                                fullWidth
-                                multiline
-                                rows={50}
-                                className={classes.titleBox}
-                                InputLabelProps={{
-                                    classes: {
-                                        root: classes.cssLabel,
-                                        focused: classes.cssFocused
-                                    }
-                                }}
-                                InputProps={{
-                                    classes: {
-                                        root: classes.cssOutlinedInput,
-                                        focused: classes.cssFocused,
-                                        notchedOutline: classes.notchedOutline
-                                    }
-                                }}
-                                label="Note:"
-                                id="custom-css-outlined-input"
-                            />
-                                </Grid>
+                                    fullWidth
+                                    className={classes.titleBox}
+                                    InputLabelProps={{
+                                        classes: {
+                                            root: classes.cssLabel,
+                                            focused: classes.cssFocused
+                                        }
+                                    }}
+                                    InputProps={{
+                                        classes: {
+                                            root: classes.cssOutlinedInput,
+                                            focused: classes.cssFocused,
+                                        }
+                                    }}
+                                    label="Title:"
+                                    id="custom-css-outlined-input"
+                                    onChange={titleChange}
+                                    value={currentNoteTitle}
+                                />
+                            
+                                        <TextField
+                                            fullWidth
+                                            multiline
+                                            rows={10}
+                                            className={classes.titleBox}
+                                            InputLabelProps={{
+                                                classes: {
+                                                    root: classes.cssLabel,
+                                                    focused: classes.cssFocused
+                                                }
+                                            }}
+                                            InputProps={{
+                                                classes: {
+                                                    root:
+                                                        classes.cssOutlinedInput,
+                                                    focused: classes.cssFocused,
+                                                }
+                                            }}
+                                            label="Note:"
+                                            id="custom-css-outlined-input"
+                                            onChange={textChange}
+                                            value={currentNoteText}
+                                        />
+                                   </Paper>
+
+                            </Grid>
+                            <Grid item>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.Button}
+                                >
+                                    <Typography className={classes.Typography} >SAVE NOTE</Typography>
+                                </Button>
                             </Grid>
                         </Grid>
-
-                        <Grid item>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                className={classes.Button}
-                            >
-                                <Typography>SAVE NOTE</Typography>
-                            </Button>
-                        </Grid>
-                    </Grid>
+                    
                 )}
             </Styled>
         );

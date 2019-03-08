@@ -26,7 +26,7 @@ function createStyled(styles, options) {
 
 const Styled = createStyled({
     AppBar: {
-        background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
+        background: "rgba(0,0,0,0)"
     },
     Grid: {
         padding: "1rem"
@@ -50,7 +50,7 @@ class Header extends Component {
         return (
             <Styled>
                 {({ classes }) => (
-                    <AppBar className={classes.AppBar} position="static">
+                    <AppBar color="default" elevation={4} className={classes.AppBar} position="sticky">
                         <Toolbar>
                             <Grid
                                 className={classes.Grid}
@@ -59,16 +59,16 @@ class Header extends Component {
                                 alignItems="center"
                             >
                                 <Grid item xs="auto">
-                                    <Description className={classes.Icon} />
+                                    <Menu/>
                                 </Grid>
                                 <Grid item xs={2}>
                                     <Typography className={classes.Typography}>
                                         taNotes
                                     </Typography>
                                 </Grid>
-                                <Grid item lg={6} md={4} sm={2} xs={false} />
+                                <Grid item lg={6} md={4} sm={2} xs={false}> </Grid>
                                 <Grid item xs="auto">
-                                    <Menu/>
+                                    
                                 </Grid>
                             </Grid>
                         </Toolbar>
