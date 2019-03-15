@@ -26,7 +26,8 @@ function createStyled(styles, options) {
 
 const Styled = createStyled({
     AppBar: {
-        background: "rgba(0,0,0,0)"
+        background: "rgba(0,0,0,0)",
+        boxShadow: "0 .1rem #bf360c"
     },
     Grid: {
         padding: "1rem"

@@ -18,9 +18,10 @@ const NoteList = ({ noteTitles, createNote, clickTitle }) => {
                 fullWidth
                 id={i}
                 variant="contained"
+                color="primary"
                 onClick={clickTitle}
                 style={{
-                    borderRadius:"1.25rem",
+                    borderRadius: "1.25rem",
                     margin: ".5rem 0",
                     minHeight: "2.5rem",
                     padding: ".5rem",
@@ -39,40 +40,48 @@ const NoteList = ({ noteTitles, createNote, clickTitle }) => {
         );
     });
     return (
-        <Paper style={{position:"relative", height:"100%", margin:"30px", borderRadius:"10px", background:"rgba(20,20,20,0.5)", zIndex:3 }}>
-        <Grid alignItems="stretch" justify="center" container>
-            <Grid
-                item
-                xs={10}
-                style={{
-                    margin: ".5rem",
-                    padding: "1rem 0 0 0",
-                    position: "relative",
-                    textAlign: "center",
-                    zIndex: 6
-                }}
-            >
-                {noteComponent}
-
-                <Button
-                    fullWidth
-                    variant="contained"
-                    
-                    color="primary"
+        <Paper
+            style={{
+                position: "relative",
+                margin: "30px",
+                borderRadius: "10px",
+                background: "rgba(20,20,20,0.5)",
+                zIndex: 3
+            }}
+        >
+            <Grid alignItems="stretch" justify="center" container>
+                <Grid
+                    item
+                    xs={10}
                     style={{
-                        margin: "1rem 0",
-                        minHeight: "1.5rem",
-                        padding: ".5rem",
-                        background: "rgba(40, 40, 40,.6)",
-                border: "solid 2px #16B2AA",
-                borderRadius: 100
+                        margin: ".5rem",
+                        padding: "1rem 0 0 0",
+                        position: "relative",
+                        textAlign: "center",
+                        zIndex: 6
                     }}
-                    onClick={createNote}
                 >
-                    + create new note
-                </Button>
+                    {noteComponent}
+
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        style={{
+                            margin: "1rem 0",
+                            minHeight: "1.5rem",
+                            padding: ".5rem",
+                            background: "rgba(40, 40, 40,.6)",
+                            border: "solid 2px #16B2AA",
+                            borderRadius: 100
+                        }}
+                        onClick={createNote}
+                    >
+                        + create new note
+                    </Button>
+                </Grid>
             </Grid>
-        </Grid></Paper>
+        </Paper>
     );
 };
 export default NoteList;

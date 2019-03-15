@@ -8,7 +8,33 @@ import {
     Checkbox,
     Typography
 } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { withStyles, withTheme } from "@material-ui/core/styles";
 import { Face, Fingerprint, PermIdentity, Error } from "@material-ui/icons";
+import greatWave from '../greatwave.PNG'
+
+function createStyled(styles, options) {
+    function Styled(props) {
+        const { children, ...other } = props;
+        return children(other);
+    }
+    Styled.propTypes = {
+        children: PropTypes.func.isRequired,
+        classes: PropTypes.object.isRequired
+    };
+    return withStyles(styles, options)(Styled);
+}
+const Styled = createStyled({
+    Paper: {
+        padding: "5rem",
+        borderRadius: "10px",
+        background: "rgba(21, 21, 21,.6)",
+        zIndex: 5,
+        width: "25rem",
+        margin: "30px auto",
+        
+    }
+});
 
 class Register extends Component {
     constructor(props) {
@@ -44,20 +70,21 @@ class Register extends Component {
     }
 
     onSubmitRegister = () => {
-        fetch("localhost:3000/register", {
+        fetch("http://127.0.0.1:3000/register", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
                 email: this.state.email,
                 password: this.state.password,
-                firstName: this.state.firstName,
-                lastName: this.state.lastName
+                passConfirm: this.state.passConfirm
             })
         })
             .then(response => response.json())
             .then(user => {
                 if (user.id) {
-                    this.props.loadUser(user);
+                    this.props.loadNewUser(user);
                     this.props.onRouteChange("home");
                 }
             });
@@ -66,154 +93,175 @@ class Register extends Component {
     render() {
         const { passWarn } = this.state;
         return (
-            <Grid
-                container
-                justify="center"
-                style={{ width: "600px", margin: "30px auto" }}
-            >
-                <Paper
-                    style={{
-                        width: "inherit",
-                        backgroundColor: "#616161",
-                        padding: "100px"
-                    }}
-                >
-                    <Grid
-                        container
-                        spacing={8}
-                        alignItems="center"
-                        style={{ textAlign: "center" }}
-                    >
-                        <Grid item xs={12}>
-                            <PermIdentity
-                                style={{ fontSize: 200, color: "#fff" }}
-                            />
-                        </Grid>
-                        <Grid item xs={12} style={{ textAlign: "center" }}>
-                            <Typography variant="title">
-                                Register A New User
-                            </Typography>
-                        </Grid>
-                    </Grid>
-
-                    <Grid
-                        container
-                        spacing={8}
-                        alignItems="flex-end"
-                        style={{ padding: "20px" }}
-                    >
-                        <Grid item>
-                            <Face style={{ color: "#FFF3E0" }} />
-                        </Grid>
-                        <Grid item md={true} sm={true} xs={true}>
-                            <TextField
-                                id="firstName"
-                                label="First Name"
-                                type="text"
-                                onChange={this.handleInputChange}
-                                fullWidth
-                                required
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid
-                        container
-                        spacing={8}
-                        alignItems="flex-end"
-                        style={{ padding: "20px" }}
-                    >
-                        <Grid item>
-                            <Face style={{ color: "#FFF3E0" }} />
-                        </Grid>
-                        <Grid item md={true} sm={true} xs={true}>
-                            <TextField
-                                id="lastName"
-                                label="Last Name"
-                                type="text"
-                                onChange={this.handleInputChange}
-                                fullWidth
-                                required
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid
-                        container
-                        spacing={8}
-                        alignItems="flex-end"
-                        style={{ padding: "20px" }}
-                    >
-                        <Grid item>
-                            <Face style={{ color: "#FFF3E0" }} />
-                        </Grid>
-                        <Grid item md={true} sm={true} xs={true}>
-                            <TextField
-                                id="email"
-                                label="Email Address"
-                                type="email"
-                                onChange={this.handleInputChange}
-                                fullWidth
-                                required
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid
-                        container
-                        spacing={8}
-                        alignItems="flex-end"
-                        style={{ padding: "20px" }}
-                    >
-                        <Grid item>
-                            <Fingerprint style={{ color: "#FFF3E0" }} />
-                        </Grid>
-                        <Grid item md={true} sm={true} xs={true}>
-                            <TextField
-                                id="password"
-                                label="Password"
-                                type="password"
-                                onChange={this.handleInputChange}
-                                fullWidth
-                                required
-                            />
-                        </Grid>
-                    </Grid>
-                    {passWarn ? (
+            <Styled>
+                {({ classes }) => (
+                    <Paper className={classes.Paper}>
                         <Grid
                             container
                             spacing={8}
                             alignItems="center"
-                            justify="center"
+                            className={classes.Gri}
+                            style={{ textAlign: "center" }}
+                        >
+                            <Grid item xs={12}>
+                            <img src={greatWave} alt="great wave"  style={{position:"relative", top:"-5rem", filter: "drop-shadow(0 0 .2rem #fff)" }}   />
+
+                            </Grid>
+                            <Grid
+                                item
+                                xs={12}
+                                className={classes.Typography}
+                                style={{ textAlign: "center" }}
+                            >
+                                <Typography variant="title">
+                                    Register A New User
+                                </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid
+                            container
+                            spacing={8}
+                            alignItems="flex-end"
+                            className={classes.Typography}
+                            style={{ padding: "20px" }}
                         >
                             <Grid item>
-                                <Error style={{ color: "#ff1744" }} />
+                                <Face
+                                    className={classes.Typography}
+                                    style={{ color: "#FFF3E0" }}
+                                />
                             </Grid>
+                            <Grid item md={true} sm={true} xs={true}>
+                                <TextField
+                                    id="firstName"
+                                    label="First Name"
+                                    type="text"
+                                    onChange={this.handleInputChange}
+                                    fullWidth
+                                    required
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            spacing={8}
+                            alignItems="flex-end"
+                            className={classes.Typography}
+                            style={{ padding: "20px" }}
+                        >
                             <Grid item>
-                                <Typography>Passwords do not match.</Typography>
+                                <Face
+                                    className={classes.Typography}
+                                    style={{ color: "#FFF3E0" }}
+                                />
+                            </Grid>
+                            <Grid item md={true} sm={true} xs={true}>
+                                <TextField
+                                    id="lastName"
+                                    label="Last Name"
+                                    type="text"
+                                    onChange={this.handleInputChange}
+                                    fullWidth
+                                    required
+                                />
                             </Grid>
                         </Grid>
-                    ) : (
-                        <div style={{ padding: "10px" }} />
-                    )}
-                    <Grid
-                        container
-                        spacing={8}
-                        alignItems="flex-end"
-                        style={{ padding: "0px 20px 20px 20px" }}
-                    >
-                        <Grid item>
-                            <Fingerprint style={{ color: "#FFF3E0" }} />
+                        <Grid
+                            container
+                            spacing={8}
+                            alignItems="flex-end"
+                            className={classes.Typography}
+                            style={{ padding: "20px" }}
+                        >
+                            <Grid item>
+                                <Face style={{ color: "#FFF3E0" }} />
+                            </Grid>
+                            <Grid item md={true} sm={true} xs={true}>
+                                <TextField
+                                    id="email"
+                                    label="Email Address"
+                                    type="email"
+                                    onChange={this.handleInputChange}
+                                    fullWidth
+                                    required
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item md={true} sm={true} xs={true}>
-                            <TextField
-                                id="passConfirm"
-                                label="Confirm Password"
-                                type="password"
-                                onChange={this.handleInputChange}
-                                fullWidth
-                                required
+                        <Grid
+                            container
+                            spacing={8}
+                            alignItems="flex-end"
+                            className={classes.Typography}
+                            style={{ padding: "20px" }}
+                        >
+                            <Grid item>
+                                <Fingerprint
+                                    className={classes.Typography}
+                                    style={{ color: "#FFF3E0" }}
+                                />
+                            </Grid>
+                            <Grid item md={true} sm={true} xs={true}>
+                                <TextField
+                                    id="password"
+                                    label="Password"
+                                    type="password"
+                                    onChange={this.handleInputChange}
+                                    fullWidth
+                                    required
+                                />
+                            </Grid>
+                        </Grid>
+                        {passWarn ? (
+                            <Grid
+                                container
+                                spacing={8}
+                                alignItems="center"
+                                justify="center"
+                            >
+                                <Grid item>
+                                    <Error
+                                        className={classes.Typography}
+                                        style={{ color: "#ff1744" }}
+                                    />
+                                </Grid>
+                                <Grid item>
+                                    <Typography>
+                                        Passwords do not match.
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        ) : (
+                            <div
+                                className={classes.Typography}
+                                style={{ padding: "10px" }}
                             />
+                        )}
+                        <Grid
+                            container
+                            spacing={8}
+                            alignItems="flex-end"
+                            className={classes.Typography}
+                            style={{ padding: "0px 20px 20px 20px" }}
+                        >
+                            <Grid item>
+                                <Fingerprint
+                                    className={classes.Typography}
+                                    style={{ color: "#FFF3E0" }}
+                                />
+                            </Grid>
+                            <Grid item md={true} sm={true} xs={true}>
+                                <TextField
+                                    id="passConfirm"
+                                    label="Confirm Password"
+                                    type="password"
+                                    onChange={this.handleInputChange}
+                                    fullWidth
+                                    required
+                                />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    {/* <Grid container alignItems="center" justify="space-between">
+                        {/* <Grid container alignItems="center" justify="space-between">
                         <Grid item>
                             <FormControlLabel
                                 control={<Checkbox color="primary" />}
@@ -232,25 +280,35 @@ class Register extends Component {
                             </Button>
                         </Grid>
                     </Grid> */}
-                    <Grid
-                        container
-                        justify="center"
-                        style={{ padding: "5px 10px", marginTop: "10px" }}
-                    >
-                        <Button
-                            fullWidth
-                            variant="raised"
-                            color="primary"
-                            style={{ textTransform: "none" }}
-                            onClick={this.onSubmitRegister}
+                        <Grid
+                            container
+                            justify="center"
+                            className={classes.Typography}
+                            style={{
+                                padding: "5px 10px",
+                                marginTop: "10px"
+                            }}
                         >
-                            Register
-                        </Button>
-                    </Grid>
-                </Paper>
-            </Grid>
+                            <Button
+                                fullWidth
+                                variant="raised"
+                                color="primary"
+                                className={classes.Typography}
+                                style={{ textTransform: "none" }}
+                                onClick={this.onSubmitRegister}
+                            >
+                                Register
+                            </Button>
+                        </Grid>
+                    </Paper>
+                )}
+            </Styled>
         );
     }
 }
 
-export default Register;
+Register.propTypes = {
+    theme: PropTypes.object.isRequired
+};
+
+export default withTheme()(Register);

@@ -29,10 +29,6 @@ function createStyled(styles, options) {
     return withStyles(styles, options)(Styled);
 }
 const Styled = createStyled({
-            GridContainer: {
-               
-            },
-            GridItem: {},
             Paper: {
                 position: "relative",
                 margin: "30px",
@@ -52,8 +48,6 @@ const Styled = createStyled({
                 borderRadius: 100
                 
             },
-        
-           
             titleBox: {
                 padding: "3.3rem 0 0 0"
             },
@@ -152,8 +146,7 @@ class NoteBox extends Component {
                                             }}
                                             InputProps={{
                                                 classes: {
-                                                    root:
-                                                        classes.cssOutlinedInput,
+                                                    root: classes.cssOutlinedInput,
                                                     focused: classes.cssFocused,
                                                 }
                                             }}
