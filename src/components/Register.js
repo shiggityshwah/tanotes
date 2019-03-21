@@ -28,11 +28,11 @@ const Styled = createStyled({
     Paper: {
         padding: "5rem",
         borderRadius: "10px",
-        background: "rgba(21, 21, 21,.6)",
+        background: "rgba(21, 21, 21,.8)",
         zIndex: 5,
         width: "25rem",
         margin: "30px auto",
-        
+
     }
 });
 

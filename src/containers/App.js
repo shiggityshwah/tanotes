@@ -85,8 +85,8 @@ class App extends Component {
     onTextChange = event => {
         const newTexts = this.state.texts.slice();
         newTexts[this.state.currentNote] = event.target.value;
-        this.setState({ 
-            texts: newTexts 
+        this.setState({
+            texts: newTexts
         });
         this.saveToDatabase();
     };
@@ -146,7 +146,7 @@ class App extends Component {
                     <div
                         style={{
                             background:
-                                "linear-gradient(180deg,rgba(11, 11, 19,.8),#0b0b13)",
+                                "linear-gradient(180deg,rgba(11, 11, 19,.6),#0b0b13)",
                             position: "absolute",
                             width: "100%",
                             zIndex: 0,

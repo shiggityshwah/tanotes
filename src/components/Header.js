@@ -27,7 +27,6 @@ function createStyled(styles, options) {
 const Styled = createStyled({
     AppBar: {
         background: "rgba(0,0,0,0)",
-        boxShadow: "0 .1rem #bf360c"
     },
     Grid: {
         padding: "1rem"
@@ -47,7 +46,7 @@ const Styled = createStyled({
 class Header extends Component {
 
     render() {
-       
+
         return (
             <Styled>
                 {({ classes }) => (
@@ -69,7 +68,7 @@ class Header extends Component {
                                 </Grid>
                                 <Grid item lg={6} md={4} sm={2} xs={false}> </Grid>
                                 <Grid item xs="auto">
-                                    
+
                                 </Grid>
                             </Grid>
                         </Toolbar>
